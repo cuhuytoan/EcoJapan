@@ -1,0 +1,225 @@
+﻿@page 
+@model CMS.Website.Areas.Admin.Pages.Advertising.CreateModel
+@{
+    ViewData["Title"] = "Chỉnh sửa quảng cáo";
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";    
+}
+
+<style type="text/css">
+    .image-preview-main {
+        position: relative;
+        vertical-align: top;
+        height: auto;
+        width: 100%;
+    }
+
+    .image-preview-main-db {
+        position: relative;
+        vertical-align: top;
+        height: auto;
+        width: 100%;
+    }
+</style>
+<!-- Main-body start -->
+<div class="main-body">
+    <div class="page-wrapper">
+        <!-- Page-header start -->
+        <div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="page-header-title">
+                        <div class="d-inline">
+                            <h4>Cập nhật quảng cáo</h4>
+                            <span>Thêm mới, chỉnh sửa quảng cáo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="page-header-breadcrumb">
+                        <ul class="breadcrumb-title">
+                            <li class="breadcrumb-item">
+                                <a href="/Admin"> <i class="feather icon-home"></i> </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/Admin/Advertising/Index">quảng cáo</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#!">Cập nhật quảng cáo</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page-header end -->
+        <!-- Page body start -->
+        <div class="page-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Basic Form Inputs card start -->
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="sub-title">Nội dung mô tả</h4>
+                            <form method="post">
+                                <input type="hidden" class="form-control" asp-for="Advertising.Id">
+                                <input type="hidden" class="form-control" asp-for="Advertising.AdvertisingBlockId" value="@ViewData["AdBlockId"]">
+                                <div class="form-group row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Tên quảng cáo</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" asp-for="Advertising.Title" placeholder="Nhập tên quảng cáo">
+                                                <span asp-validation-for="Advertising.Title" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Đường link</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" asp-for="Advertising.Url" placeholder="Nhập link">
+                                                <span asp-validation-for="Advertising.Url" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Thứ tự hiện thị</label>
+                                            <div class="col-sm-10">
+                                                <input type="number" class="form-control" asp-for="Advertising.Sort" placeholder="">
+                                                <span asp-validation-for="Advertising.Sort" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Kích thước ngang (px)</label>
+                                            <div class="col-sm-10">
+                                                <input type="number" class="form-control" asp-for="Advertising.Width" placeholder="">
+                                                <span asp-validation-for="Advertising.Width" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Kích thước dọc (px)</label>
+                                            <div class="col-sm-10">
+                                                <input type="number" class="form-control" asp-for="Advertising.Height" placeholder="">
+                                                <span asp-validation-for="Advertising.Height" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Ngày giờ đăng</label>
+                                            <div class="col-sm-4">
+                                                @(Html.Kendo().DateTimePickerFor(m => m.Advertising.StartDate)
+                                                    .HtmlAttributes(new { style = "width: 250px;" })
+                                                    .Value(DateTime.Now)
+                                                    .Culture("vi-VN")
+                                                    .Format("dd/MM/yyyy HH:mm"))
+                                                <span asp-validation-for="Advertising.StartDate" class="text-danger"></span>
+                                            </div>
+                                            <label class="col-sm-3 col-form-label" style="text-align: right;">Ngày kết thúc</label>
+                                            <div class="col-sm-3">
+                                                <div style="float: right">
+                                                    @(Html.Kendo().DateTimePickerFor(m => m.Advertising.EndDate)
+                                                    .HtmlAttributes(new { style = "width: 250px;" })
+                                                    .Value(DateTime.Now.AddYears(10))
+                                                    .Culture("vi-VN")
+                                                    .Format("dd/MM/yyyy HH:mm"))
+                                                    <span asp-validation-for="Advertising.EndDate" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label"></label>
+                                            <div class="col-sm-10">
+                                                <input type="checkbox" name="chkActive" id="chkActive" />
+                                                <label style="margin-right: 30px;">Cho đăng luôn</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Code</label>
+                                            <div class="col-sm-10">
+                                                <textarea type="text" style="height: 150px;" class="form-control" asp-for="Advertising.Code" placeholder=""></textarea>
+                                                <span asp-validation-for="Advertising.Code" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                @(Html.Kendo().Upload()
+                                                    .Multiple(false)
+                                                    .Name("mainimages")
+                                                    .Messages(x => x.Select("chọn ảnh đại diện"))
+                                                    .Events(e => e.Select("onSelectMain")
+                                                    )
+                                                )
+                                                <div id="image_preview_main">
+                                                    @{if (Model.Advertising != null && Model.Advertising.Image != null)
+                                                        {
+                                                            <img class="image-preview-main-db" src="/data/Advertising/mainimages/original/@Model.Advertising.Image" />
+                                                        }
+                                                        else
+                                                        {
+
+                                                        }
+                                                    }
+                                                </div>
+                                                <span asp-validation-for="Advertising.Image" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row" style="justify-content: center">
+                                    <button type="submit" asp-page-handler="Save" class="btn btn-mat btn-primary"><i class="fa fa-save"></i>Lưu</button>
+                                    <button type="submit" asp-page-handler="Cancel" asp-route-id="@Model.AdBlockId" class="btn btn-mat btn-warning"><i class="fa fa-times-circle"></i>Hủy bỏ</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Basic Form Inputs card end -->
+                </div>
+            </div>
+        </div>
+        <!-- Page body end -->
+    </div>
+</div>
+
+<script>
+
+    function onDropDownSelect(e) {
+        var dataitem = e.sender.dataItem(e.node);
+        console.log(dataitem);
+        if (dataitem.hasChildren) {
+            e.preventDefault();
+        }
+    }
+</script>
+
+<script type="text/javascript">
+
+    function onSelectMain(e) {
+        var fileInfos = e.files;
+        var wrapper = this.wrapper;
+
+        fileInfos.forEach(function (fileInfo) {
+            setTimeout(function () {
+                addPreviewMain(fileInfo, wrapper);
+            });
+        });
+    }
+
+    function addPreviewMain(file, wrapper) {
+        var raw = file.rawFile;
+        var reader = new FileReader();
+
+        if (raw) {
+            reader.onloadend = function () {
+                var preview = $("<img class='image-preview-main'>").attr("src", this.result);
+
+                wrapper.find(".k-file[data-uid='" + file.uid + "'] .k-file-extension-wrapper")
+                    .replaceWith(preview);
+                $("#image_preview_main").html($("<img class='image-preview-main-db'>").attr("src", this.result));
+            };
+            reader.readAsDataURL(raw);
+        }
+    }
+</script>
+<script>
+    function forgeryToken() {
+        return kendo.antiForgeryTokens();
+    }</script>

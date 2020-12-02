@@ -1,0 +1,169 @@
+﻿@page "{keyword?}"
+@model CMS.Website.Areas.Admin.Pages.Article.ArticleRelationArticleModel
+@{
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+    var ArticleId = ViewData["ArticleId"];
+}
+<style>
+    #employees {
+        width: 500px;
+    }
+
+    .demo-section label {
+        margin-bottom: 5px;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    #example .demo-section {
+        max-width: none;
+        width: 100%;
+    }
+
+    #example .k-listbox {
+        width: 500px;
+        height: 600px;
+    }
+
+        #example .k-listbox:first-of-type {
+            width: 500px;
+            margin-right: 1px;
+        }
+
+    #example .search-box {
+        display: flex;
+    }
+</style>
+<div class="main-body">
+    <div class="page-wrapper">
+        <!-- Page-header start -->
+        <div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="page-header-title">
+                        <div class="d-inline">
+                            <h4>@ViewData["Title"]</h4>
+                            <span>Thêm bớt bài viết liên quan bài <b>@ViewData["Title"]</b></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="page-header-breadcrumb">
+                        <ul class="breadcrumb-title">
+                            <li class="breadcrumb-item">
+                                <a href="index-1.htm"> <i class="feather icon-home"></i> </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#!">Trang chủ</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#!">Thêm bớt bài viết liên quan</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page-header end -->
+        <!-- Page body start -->
+        <div class="page-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Basic Form Inputs card start -->
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="sub-title">Thêm bớt bài viết liên quan</h4>
+                            <div id="example" role="application">
+                                <form>
+                                    <div class="search-box" style="max-width: 1022px;">
+                                        <input type="hidden" class="form-control" asp-for="@ArticleId" name="id">
+                                        <input type="text" class="form-control" asp-for="@Model.keyword" placeholder="Tìm kiếm bài viết">
+                                        <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                                    </div>
+                                </form>
+                                <div class="demo-section k-content wide" style="margin-top: 15px;">
+                                    <label for="optional" id="employees">Danh sách bài viết</label>
+                                    <label for="selected">Bài viết liên quan</label>
+                                    <br />
+                                    @(Html.Kendo().ListBox()
+                                    .Name("optional")
+                                    .Toolbar(toolbar =>
+                                    {
+                                        toolbar.Position(ListBoxToolbarPosition.Right);
+                                        toolbar.Tools(tools => tools
+                                            .TransferTo()
+                                            .TransferFrom()
+                                        );
+                                    })
+                                    .ConnectWith("selected")
+                                    .Selectable(ListBoxSelectable.Multiple)
+                                    .Draggable()
+                                    .DropSources("selected")
+                                    .DataTextField("Name")
+                                    .DataValueField("Id")
+                                    .DataSource(source => source
+                                        .Custom()
+                                        .Type("aspnetmvc-ajax")
+                                        .Transport(transport => transport
+                                            .Read(read => read.Action("GetArticleCategoryByID", "Article",new { keyword = Model.keyword}))
+                                        )
+                                    )
+                                    )
+                                    @(Html.Kendo().ListBox()
+                                        .Name("selected")
+                                        .ConnectWith("optional")
+                                        .Selectable(ListBoxSelectable.Multiple)
+                                        .Draggable()
+                                        .DropSources("optional")
+                                        .DataTextField("Name")
+                                        .DataValueField("Id")
+                                         .DataSource(source => source
+                                        .Custom()
+                                        .Type("aspnetmvc-ajax")
+                                        .Transport(transport => transport
+                                            .Read(read => read.Action("GetArticleRelated", "Article", new { ArticleId = ViewData["articleId"] }))
+                                        )
+                                        )
+                                        .Events(events => events
+                                            .Add("onAdd")
+                                            .Remove("onRemove")
+                                        )
+                                    )
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Basic Form Inputs card end -->
+                </div>
+            </div>
+        </div>
+        <!-- Page body end -->
+    </div>
+</div>
+<script>
+    function onAdd(e) {
+        SaveConfigArticle(1, e.dataItems[0].Id, @ViewData["ArticleId"] );
+    };
+    function onRemove(e) {
+        SaveConfigArticle(0, e.dataItems[0].Id, @ViewData["ArticleId"] );
+    };
+
+    function SaveConfigArticle(IsAdd, ArticleRelateId, ArticleId)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/Article/SaveRelatedArticle?IsAdd=" + IsAdd + "&ArticleRelateId=" + ArticleRelateId + "&ArticleId=" + ArticleId,
+            dataType: "json",
+            success: function (response) {
+                //location.reload();
+                //alert("Thành công");
+            },
+            failure: function (response) {
+                alert(response);
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    }
+</script>

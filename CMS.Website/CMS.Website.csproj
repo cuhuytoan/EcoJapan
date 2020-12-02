@@ -1,0 +1,126 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>true</CopyRefAssembliesToPublishDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.2" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2020.1.114" />
+    <PackageReference Include="X.PagedList" Version="8.0.7" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.0.7" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Core\**" />
+    <Compile Remove="data\**" />
+    <Compile Remove="wwwroot\adminty\**" />
+    <Compile Remove="wwwroot\data\**" />
+    <Content Remove="Core\**" />
+    <Content Remove="data\**" />
+    <Content Remove="wwwroot\adminty\**" />
+    <Content Remove="wwwroot\data\**" />
+    <EmbeddedResource Remove="Core\**" />
+    <EmbeddedResource Remove="data\**" />
+    <EmbeddedResource Remove="wwwroot\adminty\**" />
+    <EmbeddedResource Remove="wwwroot\data\**" />
+    <None Remove="Core\**" />
+    <None Remove="data\**" />
+    <None Remove="wwwroot\adminty\**" />
+    <None Remove="wwwroot\data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\adminty\files\assets\css\component.css" />
+    <Content Include="wwwroot\adminty\files\assets\css\font-awesome.min.css" />
+    <Content Include="wwwroot\adminty\files\assets\css\jquery.mCustomScrollbar.css" />
+    <Content Include="wwwroot\adminty\files\assets\css\linearicons.css" />
+    <Content Include="wwwroot\adminty\files\assets\css\pcoded-horizontal.min.css" />
+    <Content Include="wwwroot\adminty\files\assets\css\site.css" />
+    <Content Include="wwwroot\adminty\files\assets\css\site.min.css" />
+    <Content Include="wwwroot\adminty\files\assets\css\style.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AutoMap\" />
+    <Folder Include="Logging\" />
+    <Folder Include="Views\Home\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="wwwroot\assets\fonts\arial.svg" />
+    <None Include="wwwroot\assets\fonts\fontawesome\fa-brands-400.svg" />
+    <None Include="wwwroot\assets\fonts\fontawesome\fa-brands-400.woff2" />
+    <None Include="wwwroot\assets\fonts\fontawesome\fa-regular-400.svg" />
+    <None Include="wwwroot\assets\fonts\fontawesome\fa-regular-400.woff2" />
+    <None Include="wwwroot\assets\fonts\fontawesome\fa-solid-900.svg" />
+    <None Include="wwwroot\assets\fonts\fontawesome\fa-solid-900.woff2" />
+    <None Include="wwwroot\assets\images\graphics\icon-eclick.svg" />
+    <None Include="wwwroot\assets\images\graphics\icon_cms.svg" />
+    <None Include="wwwroot\assets\images\graphics\icon_vne.svg" />
+    <None Include="wwwroot\assets\images\graphics\Reply.svg" />
+    <None Include="wwwroot\assets\images\graphics\Thumb-Up-Normal.svg" />
+    <None Include="wwwroot\assets\images\logo.svg" />
+    <None Include="wwwroot\assets\vendors\common\bootstrap.min.js" />
+    <None Include="wwwroot\assets\vendors\common\fastclick.min.js" />
+    <None Include="wwwroot\assets\vendors\common\jquery.min.js" />
+    <None Include="wwwroot\assets\vendors\common\modernizr.min.js" />
+    <None Include="wwwroot\assets\vendors\common\popper.min.js" />
+    <None Include="wwwroot\assets\vendors\photoswipe-4.1.2\default-skin\default-skin.svg" />
+    <None Include="wwwroot\assets\vendors\photoswipe-4.1.2\photoswipe-ui-default.js" />
+    <None Include="wwwroot\assets\vendors\photoswipe-4.1.2\photoswipe-ui-default.min.js" />
+    <None Include="wwwroot\assets\vendors\photoswipe-4.1.2\photoswipe.js" />
+    <None Include="wwwroot\assets\vendors\photoswipe-4.1.2\photoswipe.min.js" />
+    <None Include="wwwroot\assets\vendors\swiper-4.4.2\js\swiper.esm.bundle.js" />
+    <None Include="wwwroot\assets\vendors\swiper-4.4.2\js\swiper.esm.js" />
+    <None Include="wwwroot\assets\vendors\swiper-4.4.2\js\swiper.js" />
+    <None Include="wwwroot\assets\vendors\swiper-4.4.2\js\swiper.min.js" />
+    <None Include="wwwroot\assets\vendors\swiper-4.4.2\js\swiper.min.js.map" />
+    <None Include="wwwroot\assets\vendors\waypoints\jquery.waypoints.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\jquery.waypoints.min.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\noframework.waypoints.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\noframework.waypoints.min.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\shortcuts\infinite.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\shortcuts\infinite.min.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\shortcuts\inview.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\shortcuts\inview.min.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\shortcuts\sticky.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\shortcuts\sticky.min.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\waypoints.debug.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\zepto.waypoints.js" />
+    <None Include="wwwroot\assets\vendors\waypoints\zepto.waypoints.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CMS.Common\CMS.Common.csproj" />
+    <ProjectReference Include="..\CMS.Data\CMS.Data.csproj" />
+    <ProjectReference Include="..\CMS.Services\CMS.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\Shared\_ValidationScriptsPartial.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

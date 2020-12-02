@@ -1,0 +1,79 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Máy lọc nước IGALAXY S8</title>
+    <meta name="description" content="Máy lọc nước IGALAXY S8 được nghiên cứu bởi các nhà khoa học khoa cơ điện học viện Nông Nghiệp Việt Nam tiền thân là Học viện Nông Nghiệp I, sản xuất tại công ty cổ phần Hometek Việt và phân phối bởi công ty cổ phần Igalaxy Việt Nam" />
+    <meta name="keywords" content="Máy lọc nước IGALAXY S8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ecojapann" />
+    <meta name="author" content="ecojapan.vn" />
+    <meta name="robots" content="noodp,index,follow" />
+    <Meta Name="msnbot" Content="NOODP">
+    <meta name='revisit-after' content='1 days' />
+    <meta http-equiv="Content-Language" Content="vi">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+</head>
+<body>
+   <!--Header-->
+    @await Html.PartialAsync("_HeaderPartial.cshtml")
+
+    <div id="home">
+        @await Html.PartialAsync("_CarouselPartial.cshtml")
+        <div class="feature-area">
+            @RenderBody()
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        </div> <!--Todo-->
+
+        @await Html.PartialAsync("_FooterPartial.cshtml")
+
+        <script type="text/javascript">
+            $(function () {
+                // this will get the full URL at the address bar
+                var url = window.location.href;
+                // passes on every "a" tag
+                $(".menu a").each(function () {
+                    // checks if its the same on the address bar
+                    if (url == (this.href)) {
+                        $(this).closest("li").addClass("active");
+                    }
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.hiddenbtn').click(function () {
+                    $('.menumobi > ul').slideToggle(200);
+                    return false;
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('.menumobi ul').on('click', '.iconplus', function () {
+                    //remove the show class and assign hidden
+                    $(this).toggleClass('iconminus iconplus');
+                    //the subfield is a child of the parent not the next sibling
+                    $(this).siblings('.cap2').show('slow');
+                });
+                $('.menumobi ul').on('click', '.iconminus', function () {
+                    $(this).toggleClass('iconminus iconplus');
+                    $(this).siblings('.cap2').hide('slow');
+                });
+            });
+        </script>
+
+    </div> <!--Todo-->
+</body>
+</html>
+

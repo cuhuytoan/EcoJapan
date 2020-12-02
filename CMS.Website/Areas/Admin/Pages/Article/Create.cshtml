@@ -1,0 +1,301 @@
+﻿@page
+@model CMS.Website.Areas.Admin.Pages.Article.CreateModel
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+}
+<style type="text/css">
+    .image-preview-main {
+        position: relative;
+        vertical-align: top;
+        height: auto;
+        width: 100%;
+    }
+
+    .image-preview-main-db {
+        position: relative;
+        vertical-align: top;
+        height: auto;
+        width: 100%;
+    }
+</style>
+<!-- Main-body start -->
+<div class="main-body">
+    <div class="page-wrapper">
+        <!-- Page-header start -->
+        <div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="page-header-title">
+                        <div class="d-inline">
+                            <h4>Cập nhật bài viết</h4>
+                            <span>Thêm mới, chỉnh sửa bài viết</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="page-header-breadcrumb">
+                        <ul class="breadcrumb-title">
+                            <li class="breadcrumb-item">
+                                <a href="/Admin"> <i class="feather icon-home"></i> </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/Admin/Article/Index">Bài viết</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#!">Cập nhật bài viết</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page-header end -->
+        <!-- Page body start -->
+        <div class="page-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Basic Form Inputs card start -->
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="sub-title">Nội dung mô tả</h4>
+                            <form method="post">
+                                <input type="hidden" class="form-control" asp-for="Article.Id">
+                                <div class="form-group row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Tên bài viết</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" asp-for="Article.Name" placeholder="Nhập tên bài viết">
+                                                <span asp-validation-for="Article.Name" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        @*Chuyên mục*@
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Chuyên mục</label>
+                                            <div class="col-sm-10">
+                                                @(Html.Kendo().DropDownTreeFor(p => p.Article.ArticleCategoryIds)
+                                                .Placeholder("Chọn chuyên mục")
+                                                .DataTextField("Name")
+                                                .DataValueField("id")
+                                                .AutoWidth(true)
+                                                .Height("300")
+                                                .HtmlAttributes(new { style = "width: 100%" })
+                                                .Events(events => events
+                                                    .Select("onDropDownSelect"))
+                                                .AutoClose(true)
+                                                .CheckAll(false)
+                                                .DataSource(source =>
+                                                    {
+                                                        source.Read(r => r.Url(Url.Page("Create", "ArticleCategory")));
+                                                    })
+                                        )
+                                                <span asp-validation-for="Article.ArticleCategoryIds" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Ngày giờ đăng</label>
+                                            <div class="col-sm-4">
+                                                @(Html.Kendo().DateTimePickerFor(m => m.Article.StartDate)
+                                                    .HtmlAttributes(new { style = "width: 250px;" })
+                                                    .Value(DateTime.Now)
+                                                    .Culture("vi-VN")
+                                                    .Format("dd/MM/yyyy HH:mm"))
+                                                <span asp-validation-for="Article.StartDate" class="text-danger"></span>
+                                            </div>
+                                            <label class="col-sm-3 col-form-label" style="text-align: right;">Ngày kết thúc</label>
+                                            <div class="col-sm-3">
+                                                <div style="float: right">
+                                                    @(Html.Kendo().DateTimePickerFor(m => m.Article.EndDate)
+                                                    .HtmlAttributes(new { style = "width: 250px;" })
+                                                    .Value(DateTime.Now.AddYears(10))
+                                                    .Culture("vi-VN")
+                                                    .Format("dd/MM/yyyy HH:mm"))
+                                                    <span asp-validation-for="Article.EndDate" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Nội dung tóm tắt</label>
+                                            <div class="col-sm-10">
+                                                <textarea type="text" style="height: 150px;" class="form-control" asp-for="Article.Description" placeholder="Nhập nội dung tóm tắt"></textarea>
+                                                <span asp-validation-for="Article.Description" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label"></label>
+                                            <div class="col-sm-10">
+                                                <input type="checkbox" name="chkTopArticleCategory" id="chkTopArticleCategory" />
+                                                <label style="margin-right: 30px;">Bài tiêu biểu chuyên mục</label>
+                                                <input type="checkbox" name="chkTopArticleCategoryParent" id="chkTopArticleCategoryParent" />
+                                                <label>Bài tiêu biểu chuyên mục mẹ</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                @(Html.Kendo().Upload()
+                                                    .Multiple(false)
+                                                    .Name("mainimages")
+                                                    .Messages(x => x.Select("chọn ảnh đại diện"))
+                                                    .Events(e => e.Select("onSelectMain")
+                                                    )
+                                                )
+                                                <div id="image_preview_main">
+                                                    @{if (Model.Article != null && Model.Article.Image != null)
+                                                        {
+                                                            <img class="image-preview-main-db" src="/data/article/mainimages/original/@Model.Article.Image" />
+                                                        }
+                                                        else
+                                                        {
+
+                                                        }
+                                                    }
+                                                </div>
+                                                <span asp-validation-for="Article.Image" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <h4 class="sub-title">Nội dung chi tiết bài viết</h4>
+                                                @(Html.Kendo().EditorFor(p => p.Article.Content)
+
+                                                    .HtmlAttributes(new { style = "width: 100%; height:600px" })
+                                                    .StyleSheets(css => css
+                                                        .Add(Url.Content("~/shared/web/editor/editorStyles.css"))
+                                                    )
+                                                    .Tools(tools => tools
+                                                    .Clear()
+                                                    .Bold().Italic().Underline()
+                                                    .JustifyLeft().JustifyCenter().JustifyRight().JustifyFull()
+                                                    .InsertUnorderedList().InsertOrderedList()
+                                                    .Outdent().Indent()
+                                                    .CreateLink().Unlink()
+                                                    .InsertImage()
+                                                    .Snippets(snippets => snippets
+                                                        .Add("Ảnh thân bài", "<br /><table style='width: auto; margin-left: auto; margin-right: auto; text-align:center;'><tr><td><img src='/data/article/upload/anhmau.jpg' /></td></tr><tr><td style='background-color: #e6e5e5; font-style: italic; padding: 3px;'>Chú thích ảnh</td></tr></table><br />")
+                                                        .Add("Tạp chí", "<a href='https://nguoixaydung.com.vn/'>Tạp chí Người Xây dựng</a> "))
+                                                    .TableEditing()
+                                                    .FontName()
+                                                    .FontSize()
+                                                    .ForeColor().BackColor()
+                                                    .Formatting()
+                                                    .CleanFormatting()
+                                                    .ViewHtml())
+                                                    .ImageBrowser(imageBrowser => imageBrowser
+                                                        .Image("~/data/article/upload/" + User.Identity.Name + "/" +  DateTime.Now.ToString("yyyy-MM-dd") + "/{0}")
+                                                        .Read("Read", "ImageBrowser")
+                                                        .Create("Create", "ImageBrowser")
+                                                        .Upload("Upload", "ImageBrowser")
+                                                        .Thumbnail("Thumbnail1", "ImageBrowser")
+                                                    ))
+                                                <span asp-validation-for="Article.Content" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Tác giả</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" asp-for="Article.Author" placeholder="VD: Nhóm PV">
+                                                <span asp-validation-for="Article.Author" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <h4 class="sub-title">Nội dung SEO</h4>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Tags</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" asp-for="Article.Tags" placeholder="VD: kinh doanh, vật liệu xây dựng, sắt thép">
+                                                <span asp-validation-for="Article.Tags" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Meta Title</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" asp-for="Article.MetaTitle" placeholder="Nhập meta title">
+                                                <span asp-validation-for="Article.MetaTitle" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Meta Description</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" asp-for="Article.MetaDescription" placeholder="Nhập meta description">
+                                                <span asp-validation-for="Article.MetaDescription" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Meta keyword</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" asp-for="Article.MetaKeywords" placeholder="Nhập meta keyword">
+                                                <span asp-validation-for="Article.MetaKeywords" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" style="justify-content: center">
+                                            <button type="submit" asp-page-handler="Save" class="btn btn-mat btn-primary"><i class="fa fa-save"></i>Lưu</button>
+                                            <button type="submit" asp-page-handler="Publish" class="btn btn-mat btn-success"><i class="fa fa-newspaper-o"></i>Gửi đăng</button>
+                                            <button type="submit" asp-page-handler="Cancel" class="btn btn-mat btn-warning"><i class="fa fa-times-circle"></i>Hủy bỏ</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Basic Form Inputs card end -->
+                </div>
+            </div>
+        </div>
+        <!-- Page body end -->
+    </div>
+</div>
+
+<script>
+   
+    function onDropDownSelect(e) {
+        var dataitem = e.sender.dataItem(e.node);
+        console.log(dataitem);
+        if (dataitem.hasChildren) {
+            e.preventDefault();
+        }
+    }
+</script>
+
+<script type="text/javascript">
+
+    function onSelectMain(e) {
+        var fileInfos = e.files;
+        var wrapper = this.wrapper;
+
+        fileInfos.forEach(function (fileInfo) {
+            setTimeout(function () {
+                addPreviewMain(fileInfo, wrapper);
+            });
+        });
+    }
+
+    function addPreviewMain(file, wrapper) {
+        var raw = file.rawFile;
+        var reader = new FileReader();
+
+        if (raw) {
+            reader.onloadend = function () {
+                var preview = $("<img class='image-preview-main'>").attr("src", this.result);
+
+                wrapper.find(".k-file[data-uid='" + file.uid + "'] .k-file-extension-wrapper")
+                    .replaceWith(preview);
+                $("#image_preview_main").html($("<img class='image-preview-main-db'>").attr("src", this.result));
+            };
+            reader.readAsDataURL(raw);
+        }
+    }
+</script>
+<script>
+    function forgeryToken() {
+        return kendo.antiForgeryTokens();
+    }</script>

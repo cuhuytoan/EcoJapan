@@ -1,0 +1,111 @@
+﻿{
+   "ContextClassName": "CmsContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "DataEntity",
+   "ProjectRootNamespace": "CMS.Data",
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Advertising]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[AdvertisingBlock]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Article]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ArticleBlock]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ArticleBlockArticle]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ArticleCategory]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ArticleCategoryArticle]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ArticleComment]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ArticleRelationArticle]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ArticleStatus]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ArticleTop]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ArticleType]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[AspNetRoleClaims]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[AspNetRoles]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[AspNetUserClaims]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[AspNetUserLogins]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[AspNetUserProfiles]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[AspNetUserRoles]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[AspNetUsers]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[AspNetUserTokens]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ReplaceChar]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Setting]"
+      }
+   ],
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNodaTime": false,
+   "UseSpatial": false,
+   "UseStoredProcedures": false
+}

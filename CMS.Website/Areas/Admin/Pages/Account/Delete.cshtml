@@ -1,0 +1,118 @@
+﻿@page
+@model CMS.Website.Areas.Admin.Pages.Account.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Main-body start -->
+<div class="main-body">
+    <div class="page-wrapper">
+        <!-- Page-header start -->
+        <div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="page-header-title">
+                        <div class="d-inline">
+                            <h4>Thông tin thành viên</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page-header end -->
+        <!-- Page body start -->
+        <div class="page-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Basic Form Inputs card start -->
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="sub-title">Thông tin tài khoản</h4>
+                            <form method="post">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Tài khoản</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" asp-for="CreateNewUser.AspNetUsers.Email" placeholder="Nhập email tài khoản">
+                                        <span asp-validation-for="CreateNewUser.AspNetUsers.Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Mật khẩu</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" asp-for="CreateNewUser.AspNetUsers.Password" placeholder="Nhập mật khẩu">
+                                        <span asp-validation-for="CreateNewUser.AspNetUsers.Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Họ tên</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" asp-for="CreateNewUser.AspNetUserProfiles.FullName" placeholder="Nhập Họ tên">
+                                        <span asp-validation-for="CreateNewUser.AspNetUserProfiles.FullName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Ngày sinh</label>
+                                    <div class="col-sm-10">
+                                        <input type="date" id="#dropper-animation" class="form-control" asp-for="CreateNewUser.AspNetUserProfiles.BirthDate" placeholder="Nhập ngày sinh">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Giới tính </label>
+                                    <div class="col-sm-10">
+                                        <div class="form-radio">
+                                            <div class="radio radio-inline">
+                                                <label>
+                                                    <input type="radio" name="radio" asp-for="CreateNewUser.AspNetUserProfiles.Gender" value="0" checked="checked">
+                                                    <i class="helper"></i>Nam
+                                                </label>
+                                            </div>
+                                            <div class="radio radio-inline">
+                                                <label>
+                                                    <input type="radio" name="radio" asp-for="CreateNewUser.AspNetUserProfiles.Gender" value="1">
+                                                    <i class="helper"></i>Nữ
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Số điện thoại</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control mob_no" data-mask="9999-999-999" asp-for="CreateNewUser.AspNetUserProfiles.Phone" placeholder="Nhập số điện thoại">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Địa chỉ</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" asp-for="CreateNewUser.AspNetUserProfiles.Address" placeholder="Nhập địa chỉ">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Quyền hạn</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" asp-for="CreateNewUser.AspNetUserRoles.RoleId" asp-items="Model.BindingListRole">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row" style="justify-content: center">
+                                    <input type="hidden" asp-for="CreateNewUser.AspNetUsers.Id" />
+                                    <button type="submit" value="Delete" class="btn btn-danger"> Xóa </button>
+                                    <a asp-page="./Index"><button class="btn btn-info">Quay lại danh sách</button></a>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Basic Form Inputs card end -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Page body end -->
+    </div>
+</div>

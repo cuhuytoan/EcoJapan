@@ -1,0 +1,121 @@
+﻿@page "/bai-viet/{url}"
+@model CMS.Website.Pages.Article.ArticleDetailModel
+@{
+    ViewBag.Title = Html.Raw(System.Web.HttpUtility.HtmlDecode(@Model.ArticleDetail.Name));
+    Layout = "~/Pages/Shared/_LayoutHome.cshtml";
+}
+
+<div class="container flexbox">
+    @await Html.PartialAsync("~/Pages/Shared/_BreadcrumbPartial.cshtml", Model.BreadCrumb)
+</div>
+<section class="section page-detail top-detail">
+    <div class="container">
+        <div class="col-left-top">
+            <div class="flexbox mt-3">
+                <h1 class="title-detail">@Model.ArticleDetail.Name</h1>
+                <div class="meta mb10 clearfix w-100">
+                    <span class="datetime mt20 left"><i class="far fa-clock"></i><span class="format_time"></span><span class="format_date">@DateTime.Parse(Model.ArticleDetail.CreateDate.ToString()).ToString("HH:mm | dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture)</span></span>
+                </div>
+                <p class="description"><strong>@Model.ArticleDetail.Description</strong></p>
+                <article class="fck_detail">
+                    @Html.Raw(@System.Web.HttpUtility.HtmlDecode(@Model.ArticleDetail.Content))
+                    <p class="author_mail">
+                        <strong>@Model.ArticleDetail.Author</strong>
+                    </p>
+                </article>
+                <div class="footer-content width_common">
+                    <div class="zalo-share-button-wrap">
+                        <div class="zalo-share-button" data-href="@("https://nguoixaydung.com.vn/bai-viet/" + Model.ArticleDetail.Url)" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize=false></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="fb-share-button-wrap">
+                        <div id="fb-root"></div>
+                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0" nonce="zWYgDLQt"></script>
+                        <div class="fb-like" data-href="@("https://nguoixaydung.com.vn/bai-viet/" + Model.ArticleDetail.Url)" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="socialbox">
+                        <div style="margin-bottom: 10px;">
+                            Chia sẻ
+                        </div>
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=nncanh"></script>
+
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_inline_share_toolbox_j0jy"></div>
+                    </div>
+                </div>
+                <div class="tags">
+                    @if (!String.IsNullOrEmpty(Model.ArticleDetail.Tags))
+                    {
+                        <h3 class="txt">Tags:</h3>
+                        var listkey = Model.ArticleDetail.Tags.Split(',');
+                        for (int p = 0; p < listkey.Count(); p++)
+                        {
+                            <h4 class="item-tag"><a href="/tim-kiem/@listkey[p].Trim()" title="@listkey[p].Trim()">@listkey[p].Trim()</a></h4>
+                        }
+                    }
+                </div>
+                <div class="clear"></div>
+                <div class="article-relation">
+                    @if (Model.ListArticleRelated.Count > 0)
+                    {
+                        <div class="head-title">
+                            <h3>BÀI VIẾT LIÊN QUAN</h3>
+                        </div>
+                        foreach (var p in Model.ListArticleRelated)
+                        {
+                            <div class="item">
+                                <div class="col-left">
+                                    <a href="/bai-viet/@p.Url"><img class="" alt="@p.Name" src="/data/article/mainimages/original/@p.Image"></a>
+                                </div>
+                                <div class="col-right">
+                                    <h4 class="title"><a href="/bai-viet/@p.Url">@p.Name</a></h4>
+                                    <p class="description"><a href="/bai-viet/@p.Url">@p.Description</a></p>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <aside class="col-right-top">
+            <div class="box-category">
+                <div class="banner-ads mb-3">
+                    <a class="thumb thumb-2x3" href="#" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied box-category" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+                <div class="banner-ads mb-3">
+                    <a class="thumb thumb-3x2" href="#" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied box-category" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+                <div class="banner-ads mb-3">
+                    <a class="thumb thumb-3x2" href="#" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied box-category" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+                <div class="banner-ads mb-3">
+                    <a class="thumb thumb-3x2" href="#" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied banner-ads" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</section>
+<script src="https://sp.zalo.me/plugins/sdk.js"></script>
