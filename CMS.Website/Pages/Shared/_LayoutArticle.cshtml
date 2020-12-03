@@ -27,22 +27,24 @@
 
 
     <div class="container">
-
-        <div class="main col-xs-12 col-sm-9 col-md-9 p0">
-            <div class="bracum">
-                <ul>
-                    <li>
-                        <a href="http://ecojapan.vn/">Trang chủ</a>
-                    </li>                    
-                </ul>
+        <div class="main_home">
+            <div class="main col-xs-12 col-sm-9 col-md-9 p0">
+                <div class="bracum">
+                    <ul>
+                        <li>
+                            <a href="http://ecojapan.vn/">Trang chủ</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+                <div class="content col-md-12 col-sm-12 col-xs-12 p0">
+                    @RenderBody()
+                </div>
             </div>
-            <div class="clear"></div>
-            <div class="content col-md-12 col-sm-12 col-xs-12 p0">
-               @RenderBody()
-            </div>
+            <!--LeftMenu-->
+            @await Html.PartialAsync("_ArticleLeftMenu.cshtml")
         </div>
-        <!--LeftMenu-->
-        @await Html.PartialAsync("_ArticleLeftMenu.cshtml")
+        
     </div>
 
     <!--Footer-->

@@ -1,0 +1,21 @@
+﻿@model List<CMS.Data.ModelsStore.SearchBreadCrumbByCate>
+<div class="col-left-top mt-2">
+    <div class="row">
+        <div class="breadcrumb col-lg-6">
+            <span class="br-item">
+                <a href="/" title="Trang chủ"><span>Trang chủ</span></a>
+            </span>
+            >
+            @foreach (var p in Model)
+            {
+                <span class="br-item"><a href="/@p.FullURL" title="@p.Name"><span>@p.Name</span></a></span>
+            }
+        </div>
+        @*<div class="detail-sub col-lg-6 d-flex justify-content-lg-end align-items-center">
+        <span class="sub-item"><b>•</b><a href="#">Dự án</a></span>
+        <span class="sub-item"><b>•</b><a href="#">Nội thất</a></span>
+        <span class="sub-item"><b>•</b><a href="#">Tư vấn</a></span>
+        <span class="sub-item"><b>•</b><a href="#">Nhà đẹp</a></span>*@
+    </div>
+    </div>
+</div>

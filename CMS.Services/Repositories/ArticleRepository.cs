@@ -242,7 +242,7 @@ namespace CMS.Services.Repositories
                     .AsTracking()
                     .ToListAsync();
             }
-            catch
+            catch (Exception ex)
             {
 
             }

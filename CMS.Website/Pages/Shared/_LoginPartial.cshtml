@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<ul class="nav-right">
+    <li class="user-profile header-notification">
+        <div class="dropdown-primary dropdown">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="dropdown-toggle" data-toggle="dropdown">
+                <img src="~/adminty/files/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
+                <span>@User.Identity.Name</span>
+                <i class="feather icon-chevron-down"></i>
+            </div>
+            <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                <li>
+                    <a href="#">
+                        <i class="feather icon-settings"></i> Cài đặt
+                    </a>
+                </li>
+                <li>
+                    <a href="~/Identity/Account/editprofile">
+                        <i class="feather icon-user"></i> Thông tin cá nhân
+                    </a>
+                </li>
+                <li>
+                    <a href="~/Identity/Account/changepassword">
+                        <i class="fa fa-key"></i> Thay đổi mật khẩu
+                    </a>
+                </li>
+                <li>
+                    <a href="~/Identity/Account/logout">
+                        <i class="feather icon-log-out"></i> Đăng xuất
+                    </a>
+                </li>
+            </ul>
+        }
+        </div>
+    </li>
+</ul>

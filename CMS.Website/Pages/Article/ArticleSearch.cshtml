@@ -1,0 +1,160 @@
+﻿@page "/tim-kiem/{keyword?}"
+@model CMS.Website.Pages.Article.ArticleSearchModel
+@{
+    Layout = "~/Pages/Shared/_LayoutHome.cshtml";
+    ViewBag.Title = Html.Raw("Tìm kiếm với từ khóa " + System.Web.HttpUtility.HtmlDecode(@Model.keyword));
+}
+@section metatags{
+    <meta name="description" content="@(Html.Raw("Tìm kiếm với từ khóa " + System.Web.HttpUtility.HtmlDecode(@Model.keyword)))">
+    <meta name="keywords" content="@(Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.keyword)))">
+    <meta name="author" content="Tạp chí Người xây dựng">
+    <link id="canonical" rel="canonical" href="@("https://nguoixaydung.com.vn/tim-kiem?keyword=" + Model.keyword)" />
+}
+<div class="container flexbox">
+    <div class="col-left-top mt-2">
+        <div class="row">
+            <div class="breadcrumb col-lg-6">
+                <span class="br-item"><a href="/" title="Trang chủ"><span>Trang chủ</span></a></span>
+                <span class="br-item"><a href="#" title="Tìm kiếm"><span>Tìm kiếm</span></a></span>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="section section_stream_home section_container">
+    <div class="container has_border flexbox">
+        <div class="col-left col-left-subfolder">
+            <h1 class="title-page">
+                Tìm kiếm
+            </h1>
+            <form class="wrap-search-form width_common" id="frmSearch">
+                <div class="input-form main-input width_common">
+                    <select>
+                        <option value="title">Tiêu đề</option>
+                    </select>
+                    <input class="txt-search input_form" id="search_q" type="text" placeholder="Từ khóa..." asp-for="@Model.keyword">
+                    <button class="btn" type="submit">
+                        <svg class="ic ic-search">
+                            <use xlink:href="#Search"></use>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+            <div class="width_common content-search">
+                <div class="width_common list-news-subfolder" id="result_search">
+                    @foreach (var p in Model.ListArticle)
+                    {
+                        <article class="item-news item-news-common">
+                            <div class="thumb-art">
+                                <a class="thumb thumb-5x3" title="@p.Name" href="/bai-viet/@p.Url">
+                                    <picture>
+                                        <!--if IE 9video(style='display: none;')
+                                        -->
+                                        <source srcset="/data/article/mainimages/original/@p.Image">
+                                        <!--if IE 9-->
+                                        <img class="lazy lazied" alt="@p.Name" src="/data/article/mainimages/original/@p.Image">
+                                    </picture>
+                                </a>
+                            </div>
+                            <h3 class="title-news"><a href="/bai-viet/@p.Url" title="@p.Name">@p.Name</a></h3>
+                            <p class="description">
+                                <a title="@p.Name" href="/bai-viet/@p.Url">
+                                    @if (p.Description.Length > 300)
+                                    {
+                                        @Html.Raw(System.Web.HttpUtility.HtmlEncode(p.Description.Substring(0, 300)));
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(System.Web.HttpUtility.HtmlEncode(p.Description));
+                                    }
+                                    ...
+                                </a>
+                            </p>
+                            <p class="meta-news">
+                                <a class="count_cmt" href="" style="white-space: nowrap; display: none;">
+                                    <svg class="ic ic-comment">
+                                        <use xlink:href="#Comment-Reg">
+                                            <svg id="Comment-Reg" viewBox="0 0 32 32">
+                                                <path d="M2 0h28c0.53 0 1.039 0.211 1.414 0.586s0.586 0.884 0.586 1.414v20c0 0.53-0.211 1.039-0.586 1.414s-0.884 0.586-1.414 0.586h-10l-12 8v-8h-6c-0.53 0-1.039-0.211-1.414-0.586s-0.586-0.884-0.586-1.414v-20c0-0.53 0.211-1.039 0.586-1.414s0.884-0.586 1.414-0.586v0z"></path>
+                                            </svg>
+                                        </use>
+                                    </svg><span class="font_icon widget-comment-4130467-1">3</span>
+                                </a>
+                            </p>
+                        </article>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+        <aside class="col-right-top">
+            <div class="box-category">
+                <div class="banner-ads">
+                    <a class="thumb thumb-1x1" href="" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+            <div class="box-category">
+                <div class="banner-ads">
+                    <a class="thumb thumb-1x1" href="" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+            <div class="box-category">
+                <div class="banner-ads">
+                    <a class="thumb thumb-1x1" href="" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+            <div class="box-category">
+                <div class="banner-ads">
+                    <a class="thumb thumb-1x1" href="" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </div>
+    <div class="container">
+        <div class="width_common pagination flexbox">
+            <div class="paging flexbox">
+                <div class="select-page"><span class="selected-page">Trang</span></div>
+                <div class="button-page flexbox">
+                    <a class="btn-page prev-page disable" href="#">
+                        <svg class="ic ic-arrow-left">
+                            <use xlink:href="#Arrow-Left-1">
+                                <svg id="Arrow-Left-1" viewBox="0 0 32 32">
+                                    <path d="M22.2 0.6l3 2.8-12.6 12.6 12.6 12.6-3 2.8-15.4-15.4 15.4-15.4z"></path>
+                                </svg>
+                            </use>
+                        </svg>
+                    </a>
+                    <input class="btn-page type_page" id="inputPage" type="text" value="1" disabled><a class="btn-page next-page" href="#" title="Trang 2">
+                        <svg class="ic ic-arrow-right">
+                            <use xlink:href="#Arrow-Right-1">
+                                <svg id="Arrow-Right-1" viewBox="0 0 32 32">
+                                    <path d="M9.8 31.4l-3-2.8 12.6-12.6-12.6-12.6 3-2.8 15.4 15.4-15.4 15.4z"></path>
+                                </svg>
+                            </use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

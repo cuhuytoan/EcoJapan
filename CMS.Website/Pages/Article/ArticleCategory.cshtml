@@ -1,0 +1,148 @@
+﻿@page "/chuyen-muc/{url}"
+@model CMS.Website.Pages.Article.ArticleCategoryModel
+@{
+    ViewData["Title"] = "Tạp chí người xây dựng - " + Model.articleCategory.Name;
+    Layout = "~/Pages/Shared/_LayoutHome.cshtml";
+    var pUrl = @RouteData.Values["url"];
+    var pPage = Request.Query["p"];
+}
+@section metatags{
+    <meta name="description" content="Website chính thức Tạp chí Người xây dựng. Cơ quan chủ quản: Tổng hội xây dựng Việt Nam. Cập nhật tin tức mới nhất, nhanh nhất về lĩnh vực xây dựng, kiến trúc, quy hoạch">
+    <meta name="keywords" content="Tạp chí Người xây dựng, Tổng hội xây dựng Việt Nam, xây dựng, kiến trúc, quy hoạch">
+    <meta name="author" content="Tạp chí Người xây dựng">
+    <meta name="twitter:card" content="Website chính thức Tạp chí Người xây dựng. Cơ quan chủ quản: Tổng hội xây dựng Việt Nam">
+    <meta name="twitter:site" content="https://nguoixaydung.com.vn/">
+    <meta name="twitter:image" content="https://nguoixaydung.com.vn/assets/images/logo.png">
+    <meta name="twitter:description" content="Website chính thức Tạp chí Người xây dựng. Cơ quan chủ quản: Tổng hội xây dựng Việt Nam. Cập nhật tin tức mới nhất, nhanh nhất về lĩnh vực xây dựng, kiến trúc, quy hoạch">
+    <meta property="og:url" content="https://nguoixaydung.com.vn/">
+    <meta property="og:title" content="Tạp chí Người xây dựng.">
+    <meta property="og:description" content="Website chính thức Tạp chí Người xây dựng. Cơ quan chủ quản: Tổng hội xây dựng Việt Nam. Cập nhật tin tức mới nhất, nhanh nhất về lĩnh vực xây dựng, kiến trúc, quy hoạch">
+    <meta property="og:image" content="https://nguoixaydung.com.vn/assets/images/logo.png">
+    <meta property="og:type" content="website">
+    <link id="canonical" rel="canonical" href="@("https://nguoixaydung.com.vn/chuyen-muc/" + Model.articleCategory.Url)" />
+}
+
+<div class="container flexbox">
+    @await Html.PartialAsync("~/Pages/Shared/_BreadcrumbPartial.cshtml", Model.BreadCrumb)
+</div>
+<section class="section section_topstory mt-30">
+    <div class="container flexbox">
+        <div class="col-left-top">
+            <div class="wrapper-topstory-folder wrapper-topstory-folder-v2 wrapper-topstory-home flexbox width_common">
+                <article id="blockone" class="item-news full-thumb article-topstory">
+                    @*Thay BlockOne bằng bài nổi bật chuyên mục*@
+                </article>
+                <div id="blocktwo" class="sub-news-top">
+                    @*Thay BlockTwo bằng 3 bài mới nhất*@
+                </div>
+            </div>
+        </div>
+        <aside class="col-right-top">
+            <div class="box-category">
+                <div class="banner-ads">
+                    <a class="thumb thumb-2x3" href="#" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</section>
+<section class="section section_stream_home section_container">
+    <div class="container has_border flexbox">
+        <div id="blockthree" class="col-left col-small">
+            @*Thay Block Three bằng danh sách các bài thuộc chuyên mục có phân trang*@
+        </div>
+        <div class="col-center item-box-cate box-last">
+            <div id="category1">
+            </div>
+            <div id="category2">
+            </div>
+            <div id="category3">
+            </div>
+        </div>
+        <aside class="col-right-top">
+            <div class="box-category">
+                <div class="banner-ads">
+                    <a class="thumb thumb-1x1" href="#" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+            <div class="box-category">
+                <div class="banner-ads">
+                    <a class="thumb thumb-1x1" href="#" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+            <div class="box-category">
+                <div class="banner-ads">
+                    <a class="thumb thumb-1x1" href="#" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+            <div class="box-category">
+                <div class="banner-ads">
+                    <a class="thumb thumb-1x1" href="#" title="">
+                        <picture>
+                            <source srcset="/assets/images/homepage/banner_01.png">
+                            <img class="lazy lazied" alt="" src="/assets/images/homepage/banner_01.png">
+                        </picture>
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </div>
+</section>
+<section class="section section_container">
+    <section class="section section_container">
+        <div id="category4" class="container has_border">
+        </div>
+    </section>
+    <section class="section section_container">
+        <div id="category5" class="container has_border">
+        </div>
+    </section>
+</section>
+
+<script type="text/javascript">
+     $("#blockone").load("/Shared/_HomeBlockOnePartial?url=@pUrl");
+    $("#blocktwo").load("/Shared/_HomeBlockTwoPartial?url=@pUrl");
+    $("#blockthree").load("/Shared/_HomeBlockThreePagingPartial?url=@pUrl&p=@pPage");
+    $("#category1").load("/Shared/_CategoryOnePartial?Id=2");
+    $("#category2").load("/Shared/_CategoryOnePartial?Id=3");
+    $("#category3").load("/Shared/_CategoryOnePartial?Id=7");
+    $("#category4").load("/Shared/_CategoryTwoPartial?Id=4");
+    $("#category5").load("/Shared/_CategoryTwoPartial?Id=5");
+
+    @*$.ajax({
+        type: "GET",
+        url: "/Shared/_HomeBlockThreePagingPartial?url=@pUrl&p=@pPage",
+        dataType: "html",
+        success: function (response) {
+            $('#blockthree').html(response);
+        },
+        failure: function (response) {
+            alert(response);
+        },
+        error: function (response) {
+            alert(response);
+        }
+    });*@
+
+
+</script>
